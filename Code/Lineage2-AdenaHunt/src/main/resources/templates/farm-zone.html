@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Farm Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/farm-zone.css">
+</head>
+<body>
+
+<header class="farm-zone-header">
+    <div class="zone-actions">
+        <div class="player-adena">
+            <img src="/images/adena-icon.png" alt="Adena">
+            <span th:text="${playerAdena}">4,720</span>
+        </div>
+        <a href="/lobby" class="btn exit-zone">Exit Zone</a>
+        <a href="/logout" class="btn logout">Logout</a>
+    </div>
+</header>
+
+<section class="farm-zone">
+
+    <div class="mob-row">
+        <h3 class="mob-row-title">Mobs Level 1–10</h3>
+        <div class="mob-scroll-container">
+            <div class="mob-entry" th:each="mob : ${mobs}" th:if="${mob.level >= 1 and mob.level <= 10}">
+                <img class="mob-image" th:src="${mob.imageUrl}" alt="Gremlin"/>
+                <div class="mob-info">
+                    <div class="mob-header">
+                        <span class="mob-name" th:text="${mob.name}">Gremlin</span>
+                        <span class="mob-level" th:text="${'Lv' + mob.level}">Lv2</span>
+                        <span class="mob-type-tag common" th:if="${mob.type.name() == 'COMMON'}">Common</span>
+                        <span class="mob-type-tag blue" th:if="${mob.type.name() == 'BLUE_CHAMPION'}">Blue Champion</span>
+                        <span class="mob-type-tag red" th:if="${mob.type.name() == 'RED_CHAMPION'}">Red Champion</span>
+                    </div>
+                    <div class="mob-meta">
+                        <span class="spawn-time" th:text="${#temporals.format(mob.createdOn, 'HH:mm:ss')}">10:02:14</span>
+                        <span class="mob-area-tag" th:text="${mob.spawnArea}">Talking Island</span>
+                        <span class="mob-status defeated" th:unless="${mob.alive}">Defeated</span>
+                        <span class="mob-status alive" th:if="${mob.alive}">Alive</span>
+                    </div>
+                    <div class="mob-stats">
+                        <span>Health: <strong th:text="${#numbers.formatDecimal(mob.health, 1, 0)}">170</strong></span>
+                        <span>Attack: <strong th:text="${#numbers.formatDecimal(mob.attack, 1, 0)}">45</strong></span>
+                        <span>Defense: <strong th:text="${#numbers.formatDecimal(mob.defense, 1, 0)}">15</strong></span>
+                    </div>
+                    <div class="mob-drop">
+                        <div class="drop-item">
+                            <img src="/images/adena-icon.png" alt="Adena"/>
+                            <span th:text="${mob.adenaDrop}">12</span>
+                        </div>
+                        <div class="drop-item">
+                            <img src="/images/xp-booster-icon.png" alt="XP"/>
+                            <span th:text="${mob.xpDrop + ' XP'}">18 XP</span>
+                        </div>
+                    </div>
+                    <div class="mob-description" th:text="${mob.description}">A weak, mischievous forest creature.</div>
+                    <form class="attack-button-form" th:action="@{'/mobs/' + ${mob.id}}" th:method="PATCH">
+                        <button type="submit" class="btn defeated-mob-btn" th:unless="${mob.alive}" disabled>Defeated</button>
+                        <button type="submit" class="btn" th:if="${mob.alive}">Attack</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mob-row">
+        <h3 class="mob-row-title">Mobs Level 11–20</h3>
+        <div class="mob-scroll-container">
+            <div class="mob-entry" th:each="mob : ${mobs}" th:if="${mob.level >= 11 and mob.level <= 20}">
+                <img class="mob-image" th:src="${mob.imageUrl}" alt="Gremlin"/>
+                <div class="mob-info">
+                    <div class="mob-header">
+                        <span class="mob-name" th:text="${mob.name}">Gremlin</span>
+                        <span class="mob-level" th:text="${'Lv' + mob.level}">Lv2</span>
+                        <span class="mob-type-tag common" th:if="${mob.type.name() == 'COMMON'}">Common</span>
+                        <span class="mob-type-tag blue" th:if="${mob.type.name() == 'BLUE_CHAMPION'}">Blue Champion</span>
+                        <span class="mob-type-tag red" th:if="${mob.type.name() == 'RED_CHAMPION'}">Red Champion</span>
+                    </div>
+                    <div class="mob-meta">
+                        <span class="spawn-time" th:text="${#temporals.format(mob.createdOn, 'HH:mm:ss')}">10:02:14</span>
+                        <span class="mob-area-tag" th:text="${mob.spawnArea}">Talking Island</span>
+                        <span class="mob-status defeated" th:unless="${mob.alive}">Defeated</span>
+                        <span class="mob-status alive" th:if="${mob.alive}">Alive</span>
+                    </div>
+                    <div class="mob-stats">
+                        <span>Health: <strong th:text="${#numbers.formatDecimal(mob.health, 1, 0)}">170</strong></span>
+                        <span>Attack: <strong th:text="${#numbers.formatDecimal(mob.attack, 1, 0)}">45</strong></span>
+                        <span>Defense: <strong th:text="${#numbers.formatDecimal(mob.defense, 1, 0)}">15</strong></span>
+                    </div>
+                    <div class="mob-drop">
+                        <div class="drop-item">
+                            <img src="/images/adena-icon.png" alt="Adena"/>
+                            <span th:text="${mob.adenaDrop}">12</span>
+                        </div>
+                        <div class="drop-item">
+                            <img src="/images/xp-booster-icon.png" alt="XP"/>
+                            <span th:text="${mob.xpDrop + ' XP'}">18 XP</span>
+                        </div>
+                    </div>
+                    <div class="mob-description" th:text="${mob.description}">A weak, mischievous forest creature.</div>
+                    <form class="attack-button-form" th:action="@{'/mobs/' + ${mob.id}}" th:method="PATCH">
+                        <button type="submit" class="btn defeated-mob-btn" th:unless="${mob.alive}" disabled>Defeated</button>
+                        <button type="submit" class="btn" th:if="${mob.alive}">Attack</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Fight Result -->
+<div th:if="${fightResult}" id="fight-result-modal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <h3 class="modal-title">Fight Result</h3>
+
+        <!-- Victory or Loss badge -->
+        <div class="fight-outcome-badge victory" th:if="${fightResult.outcome.name() == 'PLAYER_WIN'}">Victory</div>
+        <!-- or -->
+        <div class="fight-outcome-badge loss" th:if="${fightResult.outcome.name() == 'MOB_WIN'}">Loss</div>
+
+        <div class="fight-summary">
+            <div class="summary-row">
+                <span class="label">Mob:</span>
+                <span class="value" th:text="${fightResult.mobName}">Tanta Lizardman (Lv8, Common)</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Adena Gained:</span>
+                <span class="value" th:text="${fightResult.xpEarned}">87</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">XP Gained:</span>
+                <span class="value" th:text="${fightResult.adenaEarned}">150</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+<script>
+    function closeModal() {
+      document.getElementById('fight-result-modal').classList.add('hidden');
+    }
+</script>
+
+</body>
+</html>
