@@ -35,7 +35,7 @@
                     <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
                         <span class="pill" 
-                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:classappend="${wiz.alignment.name() == 'LIGHT' ? 'pill-align-light' : 'pill-align-dark'}"
                               th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
                         <span class="pill" 
-                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:classappend="${wiz.alignment.name() == 'LIGHT' ? 'pill-align-light' : 'pill-align-dark'}"
                               th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
                         <span class="pill" 
-                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:classappend="${wiz.alignment.name() == 'LIGHT' ? 'pill-align-light' : 'pill-align-dark'}"
                               th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                     <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
                         <span class="pill" 
-                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:classappend="${wiz.alignment.name() == 'LIGHT' ? 'pill-align-light' : 'pill-align-dark'}"
                               th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>

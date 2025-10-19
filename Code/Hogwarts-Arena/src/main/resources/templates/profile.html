@@ -64,13 +64,13 @@
                         <div class="body">
                             <h4 class="spell-name">Choose Your Path</h4>
                             <p class="desc">Power at a price. Embracing darkness is irreversible.</p>
-                            <form th:if="${wizard.alignment == T(main.model.WizardAlignment).LIGHT}" 
+                            <form th:if="${wizard.alignment.name() == 'LIGHT'}" 
                                   th:action="@{/profile/change-alignment}" method="POST">
                                 <input type="hidden" name="_method" value="PATCH"/>
                                 <button type="submit" class="btn btn-secondary full">Embrace Darkness</button>
                             </form>
                             <p class="muted" style="margin-top:.6rem;" 
-                               th:if="${wizard.alignment == T(main.model.WizardAlignment).DARK}">
+                               th:if="${wizard.alignment.name() == 'DARK'}">
                                 You have chosen the Dark path. This choice is permanent.
                             </p>
                         </div>
