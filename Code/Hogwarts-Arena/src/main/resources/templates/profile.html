@@ -33,7 +33,7 @@
                 <div class="auth-modal auth-embedded">
                     <h2 class="auth-title">Edit Profile</h2>
 
-                    <form class="auth-form" th:action="@{/profile/edit}" th:object="${editProfileRequest}" method="POST">
+                    <form class="auth-form" th:action="@{/profile/edit}" th:object="${editProfileRequest}" th:method="PUT" method="POST">
                         <input type="hidden" name="_method" value="PUT"/>
                         <div class="form-group">
                             <label for="username">
@@ -65,7 +65,7 @@
                             <h4 class="spell-name">Choose Your Path</h4>
                             <p class="desc">Power at a price. Embracing darkness is irreversible.</p>
                             <form th:if="${wizard.alignment.name() == 'LIGHT'}" 
-                                  th:action="@{/profile/change-alignment}" method="POST">
+                                  th:action="@{/profile/change-alignment}" th:method="PATCH" method="POST">
                                 <input type="hidden" name="_method" value="PATCH"/>
                                 <button type="submit" class="btn btn-secondary full">Embrace Darkness</button>
                             </form>

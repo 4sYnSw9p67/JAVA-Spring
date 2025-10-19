@@ -44,7 +44,7 @@
                     <div class="meta">
                         <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
                         <span class="meta-item">Power 
-                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                            <strong th:text="${wiz.totalPower}">312</strong>
                         </span>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <div class="meta">
                         <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
                         <span class="meta-item">Power 
-                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                            <strong th:text="${wiz.totalPower}">312</strong>
                         </span>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="meta">
                         <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
                         <span class="meta-item">Power 
-                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                            <strong th:text="${wiz.totalPower}">312</strong>
                         </span>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                     <div class="meta">
                         <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
                         <span class="meta-item">Power 
-                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                            <strong th:text="${wiz.totalPower}">312</strong>
                         </span>
                     </div>
                 </div>

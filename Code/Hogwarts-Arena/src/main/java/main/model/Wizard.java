@@ -47,4 +47,11 @@ public class Wizard {
     @Column(nullable = false)
     private LocalDateTime updatedOn;
 
+    // Helper method to calculate total spell power
+    public int getTotalPower() {
+        return spells.stream()
+                .mapToInt(Spell::getPower)
+                .sum();
+    }
+
 }

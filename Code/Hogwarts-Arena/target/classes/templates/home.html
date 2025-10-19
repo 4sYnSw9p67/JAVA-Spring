@@ -112,7 +112,7 @@
                             </div>
                             <p class="desc" th:text="${spellDef.description}">The Killing Curse - dark spell that causes instant death to its target.</p>
                             <form class="learn-form" th:if="${spellDef.minLearned <= #lists.size(learnedSpells)}"
-                                  method="post" th:action="@{/home/learn-spell(spellCode=${spellDef.code})}">
+                                  th:method="POST" method="POST" th:action="@{/home/learn-spell(spellCode=${spellDef.code})}">
                                 <button type="submit" class="btn btn-secondary full">Learn</button>
                             </form>
                         </div>

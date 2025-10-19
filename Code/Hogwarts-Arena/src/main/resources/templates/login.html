@@ -22,7 +22,7 @@
 
     <h1 class="auth-title">Login</h1>
 
-    <form class="auth-form" th:action="@{/login}" th:object="${loginRequest}" method="POST">
+    <form class="auth-form" th:action="@{/login}" th:object="${loginRequest}" th:method="POST" method="POST">
 
         <p th:if="${successMessage}" th:text="${successMessage}" class="badge badge-soft" style="margin-bottom: 1rem;"></p>
         <p th:if="${errorMessage}" th:text="${errorMessage}" class="badge badge-error" style="margin-bottom: 1rem;"></p>

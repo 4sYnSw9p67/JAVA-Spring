@@ -23,7 +23,7 @@
 
     <h1 class="auth-title">Register</h1>
 
-    <form class="auth-form" th:action="@{/register}" th:object="${registerRequest}" method="POST">
+    <form class="auth-form" th:action="@{/register}" th:object="${registerRequest}" th:method="POST" method="POST">
 
         <p th:if="${errorMessage}" th:text="${errorMessage}" class="badge badge-error" style="margin-bottom: 1rem;"></p>
 
