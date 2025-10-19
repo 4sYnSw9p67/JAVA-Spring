@@ -20,41 +20,36 @@
     <h1 class="arena-title">Hogwarts Arena</h1>
 
     <div class="back-actions">
-        <!-- TODO: use the correct url here that brings the user to home page  -->
-        <a href="/correct-url-here" class="btn btn-secondary">Back to Home</a>
+        <a href="/home" class="btn btn-secondary">Back to Home</a>
     </div>
 
     <!-- Gryffindor -->
     <section class="section panel">
         <header class="section-head">
             <h3>Gryffindor</h3>
-            <!--   TODO: Number of wizards in this house    -->
-            <span class="count-badge house-gryffindor">99</span>
+            <span class="count-badge house-gryffindor" th:text="${#lists.size(gryffindorWizards)}">0</span>
         </header>
         <div class="cards wiz-cards">
-        <!-- TODO: loop through every wizard in this house -->
-            <article class="spell-card wiz-card">
+            <article class="spell-card wiz-card" th:each="wiz : ${gryffindorWizards}">
                 <div class="media">
-                    <!-- TODO: wizard's avatar url -->
-                    <img src="/images/default-avatar.png">
+                    <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
-                        <!-- TODO: wizard's alignment (if) -->
-                        <span class="pill pill-align-light">Light</span>
-                        <!--<span class="pill pill-align-dark">Dark</span>-->
+                        <span class="pill" 
+                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>
                 <div class="body">
-                    <h4 class="spell-name">Wanda</h4> <!-- TODO: wizard's username -->
+                    <h4 class="spell-name" th:text="${wiz.username}">Wanda</h4>
                     <div class="meta">
-                        <!-- TODO: wizard's spell count -->
-                        <span class="meta-item">Spells <strong>5</strong></span>
-                        <!-- TODO: wizard's spells power sum (sum the power of every spell this user has learned) -->
-                        <span class="meta-item">Power <strong>312</strong></span>
+                        <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
+                        <span class="meta-item">Power 
+                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                        </span>
                     </div>
                 </div>
             </article>
-        <!-- TODO: Display this when there are no wizards in this house -->
-        <!--<p class="empty muted">No students yet.</p>-->
+            <p class="empty muted" th:if="${#lists.isEmpty(gryffindorWizards)}">No students yet.</p>
         </div>
     </section>
 
@@ -62,33 +57,29 @@
     <section class="section panel">
         <header class="section-head">
             <h3>Slytherin</h3>
-            <!--   TODO: Number of wizards in this house   -->
-            <span class="count-badge house-slytherin">99</span>
+            <span class="count-badge house-slytherin" th:text="${#lists.size(slytherinWizards)}">0</span>
         </header>
         <div class="cards wiz-cards">
-            <!-- TODO: loop through every wizard in this house -->
-            <article class="spell-card wiz-card">
+            <article class="spell-card wiz-card" th:each="wiz : ${slytherinWizards}">
                 <div class="media">
-                    <!-- TODO: wizard's avatar url -->
-                    <img src="/images/default-avatar.png">
+                    <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
-                        <!-- TODO: wizard's alignment (if) -->
-                        <span class="pill pill-align-light">Light</span>
-                        <!--<span class="pill pill-align-dark">Dark</span>-->
+                        <span class="pill" 
+                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>
                 <div class="body">
-                    <h4 class="spell-name">Wanda</h4> <!-- TODO: wizard's username -->
+                    <h4 class="spell-name" th:text="${wiz.username}">Wanda</h4>
                     <div class="meta">
-                        <!-- TODO: wizard's spell count -->
-                        <span class="meta-item">Spells <strong>5</strong></span>
-                        <!-- TODO: wizard's spells power sum (sum the power of every spell this user has learned) -->
-                        <span class="meta-item">Power <strong>312</strong></span>
+                        <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
+                        <span class="meta-item">Power 
+                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                        </span>
                     </div>
                 </div>
             </article>
-            <!-- TODO: Display this when there are no wizards in this house -->
-            <!--<p class="empty muted">No students yet.</p>-->
+            <p class="empty muted" th:if="${#lists.isEmpty(slytherinWizards)}">No students yet.</p>
         </div>
     </section>
 
@@ -96,33 +87,29 @@
     <section class="section panel">
         <header class="section-head">
             <h3>Ravenclaw</h3>
-            <!--   TODO: Number of wizards in this house   -->
-            <span class="count-badge house-ravenclaw">99</span>
+            <span class="count-badge house-ravenclaw" th:text="${#lists.size(ravenclawWizards)}">0</span>
         </header>
         <div class="cards wiz-cards">
-            <!-- TODO: loop through every wizard in this house -->
-            <article class="spell-card wiz-card">
+            <article class="spell-card wiz-card" th:each="wiz : ${ravenclawWizards}">
                 <div class="media">
-                    <!-- TODO: wizard's avatar url -->
-                    <img src="/images/default-avatar.png">
+                    <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
-                        <!-- TODO: wizard's alignment (if) -->
-                        <span class="pill pill-align-light">Light</span>
-                        <!--<span class="pill pill-align-dark">Dark</span>-->
+                        <span class="pill" 
+                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>
                 <div class="body">
-                    <h4 class="spell-name">Wanda</h4> <!-- TODO: wizard's username -->
+                    <h4 class="spell-name" th:text="${wiz.username}">Wanda</h4>
                     <div class="meta">
-                        <!-- TODO: wizard's spell count -->
-                        <span class="meta-item">Spells <strong>5</strong></span>
-                        <!-- TODO: wizard's spells power sum (sum the power of every spell this user has learned) -->
-                        <span class="meta-item">Power <strong>312</strong></span>
+                        <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
+                        <span class="meta-item">Power 
+                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                        </span>
                     </div>
                 </div>
             </article>
-            <!-- TODO: Display this when there are no wizards in this house -->
-            <!--<p class="empty muted">No students yet.</p>-->
+            <p class="empty muted" th:if="${#lists.isEmpty(ravenclawWizards)}">No students yet.</p>
         </div>
     </section>
 
@@ -130,33 +117,29 @@
     <section class="section panel">
         <header class="section-head">
             <h3>Hufflepuff</h3>
-            <!--   TODO: Number of wizards in this house    -->
-            <span class="count-badge house-hufflepuff">99</span>
+            <span class="count-badge house-hufflepuff" th:text="${#lists.size(hufflepuffWizards)}">0</span>
         </header>
         <div class="cards wiz-cards">
-            <!-- TODO: loop through every wizard in this house -->
-            <article class="spell-card wiz-card">
+            <article class="spell-card wiz-card" th:each="wiz : ${hufflepuffWizards}">
                 <div class="media">
-                    <!-- TODO: wizard's avatar url -->
-                    <img src="/images/default-avatar.png">
+                    <img th:src="${wiz.avatarUrl}">
                     <div class="pills">
-                        <!-- TODO: wizard's alignment (if) -->
-                        <span class="pill pill-align-light">Light</span>
-                        <!--<span class="pill pill-align-dark">Dark</span>-->
+                        <span class="pill" 
+                              th:classappend="${wiz.alignment == T(main.model.WizardAlignment).LIGHT ? 'pill-align-light' : 'pill-align-dark'}"
+                              th:text="${wiz.alignment.displayName}">Light</span>
                     </div>
                 </div>
                 <div class="body">
-                    <h4 class="spell-name">Wanda</h4> <!-- TODO: wizard's username -->
+                    <h4 class="spell-name" th:text="${wiz.username}">Wanda</h4>
                     <div class="meta">
-                        <!-- TODO: wizard's spell count -->
-                        <span class="meta-item">Spells <strong>5</strong></span>
-                        <!-- TODO: wizard's spells power sum (sum the power of every spell this user has learned) -->
-                        <span class="meta-item">Power <strong>312</strong></span>
+                        <span class="meta-item">Spells <strong th:text="${#lists.size(wiz.spells)}">5</strong></span>
+                        <span class="meta-item">Power 
+                            <strong th:text="${wiz.spells.stream().mapToInt(s -> s.getPower()).sum()}">312</strong>
+                        </span>
                     </div>
                 </div>
             </article>
-            <!-- TODO: Display this when there are no wizards in this house -->
-            <!--<p class="empty muted">No students yet.</p>-->
+            <p class="empty muted" th:if="${#lists.isEmpty(hufflepuffWizards)}">No students yet.</p>
         </div>
     </section>
 </main>

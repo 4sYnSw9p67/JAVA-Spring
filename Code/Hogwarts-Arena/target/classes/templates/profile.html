@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Wizard Profile</title>
@@ -22,32 +22,32 @@
 
     <div class="profile-content">
         <div class="page-actions">
-            <!-- TODO: use the correct url here that brings the user to home page  -->
-            <a href="/correct-url-here" class="btn btn-secondary">Back to Home</a>
+            <a href="/home" class="btn btn-secondary">Back to Home</a>
         </div>
+
+        <p th:if="${successMessage}" th:text="${successMessage}" class="badge badge-soft" style="margin: 1rem 0;"></p>
+        <p th:if="${errorMessage}" th:text="${errorMessage}" class="badge badge-error" style="margin: 1rem 0;"></p>
+
         <section class="profile-row">
             <article class="window">
                 <div class="auth-modal auth-embedded">
                     <h2 class="auth-title">Edit Profile</h2>
 
-                    <!-- TODO: Add correct form action, method and binding object here-->
-                    <form class="auth-form" action="" method="POST">
+                    <form class="auth-form" th:action="@{/profile/edit}" th:object="${editProfileRequest}" method="POST">
+                        <input type="hidden" name="_method" value="PUT"/>
                         <div class="form-group">
                             <label for="username">
                                 <span>Username</span>
-                                <!-- TODO: show the element "invalid username" only if username field has errors -->
-                                <span class="badge badge-error">invalid username</span>
+                                <span class="badge badge-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">invalid username</span>
                             </label>
-                            <!-- TODO: bind the below input element with the DTO field -->
-                            <input class="form-control" id="username" name="username" type="text" placeholder="Your wizard name" required>
+                            <input class="form-control" th:field="*{username}" id="username" type="text" placeholder="Your wizard name" required>
                         </div>
                         <div class="form-group">
                             <label for="avatarUrl">
                                 <span>Avatar URL</span>
-                                <!-- TODO: show the element "invalid url" only if avatar url field has errors -->
-                                <span class="badge badge-error">invalid url</span>
+                                <span class="badge badge-error" th:if="${#fields.hasErrors('avatarUrl')}" th:errors="*{avatarUrl}">invalid url</span>
                             </label>
-                            <input class="form-control" id="avatarUrl" name="avatarUrl" type="url" placeholder="Paste image URL">
+                            <input class="form-control" th:field="*{avatarUrl}" id="avatarUrl" type="url" placeholder="Paste image URL">
                         </div>
                         <button type="submit" class="btn btn-primary full">Save Changes</button>
                     </form>
@@ -64,12 +64,15 @@
                         <div class="body">
                             <h4 class="spell-name">Choose Your Path</h4>
                             <p class="desc">Power at a price. Embracing darkness is irreversible.</p>
-                            <!--  TODO: Show this form and allow the user to change their alignment to Dark ONLY IF they are Light wizards -->
-                            <form action="" method="">
+                            <form th:if="${wizard.alignment == T(main.model.WizardAlignment).LIGHT}" 
+                                  th:action="@{/profile/change-alignment}" method="POST">
+                                <input type="hidden" name="_method" value="PATCH"/>
                                 <button type="submit" class="btn btn-secondary full">Embrace Darkness</button>
                             </form>
-                            <!--  TODO: Show the text below ONLY IF the wizard is Dark already -->
-                        <!--<p class="muted" style="margin-top:.6rem;">You have chosen the Dark path. This choice is permanent.</p>-->
+                            <p class="muted" style="margin-top:.6rem;" 
+                               th:if="${wizard.alignment == T(main.model.WizardAlignment).DARK}">
+                                You have chosen the Dark path. This choice is permanent.
+                            </p>
                         </div>
                     </div>
                 </div>

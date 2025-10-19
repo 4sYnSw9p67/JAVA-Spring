@@ -1,4 +1,4 @@
-package main.java.main.web.dto;
+package main.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

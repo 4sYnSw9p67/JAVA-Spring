@@ -23,28 +23,25 @@
 
     <h1 class="auth-title">Register</h1>
 
-    <!-- TODO: Add correct form action, method and binding object here-->
-    <form class="auth-form" action="" method="">
+    <form class="auth-form" th:action="@{/register}" th:object="${registerRequest}" method="POST">
+
+        <p th:if="${errorMessage}" th:text="${errorMessage}" class="badge badge-error" style="margin-bottom: 1rem;"></p>
 
         <div class="form-group">
             <label for="reg-username">
                 <span>Username</span>
-                <!-- TODO: show the element "invalid username" only if username field has errors -->
-                <span class="badge badge-error">invalid username</span>
+                <span class="badge badge-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">invalid username</span>
             </label>
-            <!-- TODO: bind the below input element with the DTO field -->
-            <input class="form-control" id="reg-username" type="text" placeholder="Enter your username" required>
+            <input class="form-control" th:field="*{username}" id="reg-username" type="text" placeholder="Enter your username" required>
         </div>
 
         <div class="form-group">
             <label for="reg-password">
                 <span>Password</span>
-                <!-- TODO: show the element "invalid password" only if password field has errors -->
-                <span class="badge badge-error">invalid password</span>
+                <span class="badge badge-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">invalid password</span>
             </label>
             <div class="password-wrap">
-                <!-- TODO: bind the below input element with the DTO field -->
-                <input class="form-control" id="reg-password" type="password" placeholder="Enter your password">
+                <input class="form-control" th:field="*{password}" id="reg-password" type="password" placeholder="Enter your password">
                 <i class="fa-solid fa-eye toggle-password" onclick="togglePasswordReg()" id="toggleIconReg" aria-label="Show password"></i>
             </div>
         </div>
@@ -52,42 +49,32 @@
         <div class="form-group">
             <label for="avatarUrl" class="label-with-badge">
                 <span>Avatar URL</span>
-                <!-- TODO: show the element "invalid url" only if avatar url field has errors -->
-                <span class="badge badge-error">invalid url</span>
+                <span class="badge badge-error" th:if="${#fields.hasErrors('avatarUrl')}" th:errors="*{avatarUrl}">invalid url</span>
             </label>
-            <!-- TODO: bind the below input element with the DTO field -->
-            <input class="form-control" id="avatarUrl" type="url" placeholder="Paste image URL">
+            <input class="form-control" th:field="*{avatarUrl}" id="avatarUrl" type="url" placeholder="Paste image URL">
         </div>
 
         <div class="form-group">
             <label for="house" class="label-with-badge">
                 <span>House</span>
-                <!-- TODO: show the element "not null" only if house field has errors -->
-                <span class="badge badge-error">not null</span>
+                <span class="badge badge-error" th:if="${#fields.hasErrors('house')}" th:errors="*{house}">not null</span>
                 <span class="badge badge-soft">choose wisely</span>
             </label>
-            <!-- TODO: bind the below select element with the DTO field, iterating over the allowed options-->
-            <select class="form-select" id="house" required>
+            <select class="form-select" th:field="*{house}" id="house" required>
                 <option value="">Select your house</option>
-                <option value="">Gryffindor</option>
-                <option value="">Hufflepuff</option>
-                <option value="">Ravenclaw</option>
-                <option value="">Slytherin</option>
+                <option th:each="house : ${T(main.model.House).values()}" th:value="${house}" th:text="${house.displayName}">Gryffindor</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="path" class="label-with-badge">
                 <span>Alignment</span>
-                <!-- TODO: show the element "not null" only if alignment field has errors -->
-                <span class="badge badge-error">not null</span>
+                <span class="badge badge-error" th:if="${#fields.hasErrors('alignment')}" th:errors="*{alignment}">not null</span>
                 <span class="badge badge-soft">light or dark wizard</span>
             </label>
-            <!-- TODO: bind the below select element with the DTO field, iterating over the allowed options-->
-            <select class="form-select" id="path" required>
+            <select class="form-select" th:field="*{alignment}" id="path" required>
                 <option value="">Choose your path</option>
-                <option value="">Light</option>
-                <option value="">Dark</option>
+                <option th:each="alignment : ${T(main.model.WizardAlignment).values()}" th:value="${alignment}" th:text="${alignment.displayName}">Light</option>
             </select>
         </div>
 
