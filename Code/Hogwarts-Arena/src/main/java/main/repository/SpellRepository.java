@@ -9,5 +9,4 @@ import java.util.UUID;
 @Repository
 public interface SpellRepository extends JpaRepository<Spell, UUID> {
 
-    // TODO: Add methods if necessary.
 }

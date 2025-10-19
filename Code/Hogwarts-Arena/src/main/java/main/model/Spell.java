@@ -1,11 +1,9 @@
 package main.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
@@ -20,6 +18,34 @@ public class Spell {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    // TODO: Complete the entity fields
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false, length = 1000)
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "wizard_id", nullable = false)
+    private Wizard wizard;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SpellCategory category;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SpellAlignment alignment;
+
+    @Column(nullable = false)
+    private String image;
+
+    @Column(nullable = false)
+    private int power;
+
+    @Column(nullable = false)
+    private LocalDateTime createdOn;
 
 }

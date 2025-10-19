@@ -6,6 +6,12 @@
       "sourceType": "main.property.SpellsProperties"
     }
   ],
-  "properties": [],
+  "properties": [
+    {
+      "name": "spells",
+      "type": "java.util.List<main.property.SpellsProperties$SpellDefinition>",
+      "sourceType": "main.property.SpellsProperties"
+    }
+  ],
   "hints": []
 }
