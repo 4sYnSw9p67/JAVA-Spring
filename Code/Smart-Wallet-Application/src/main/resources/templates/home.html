@@ -105,7 +105,7 @@
     <div class="single-section-box home-profile-information">
       <div class="profile-header">
         <img th:src="${#strings.isEmpty(user.profilePicture) ? 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png' : user.profilePicture}" alt="Profile Picture" class="profile-avatar">
-        <h2 class="profile-name" th:text="${user.username}">Mandarin0016</h2>
+        <h2 class="profile-name" th:text="${user.username}">User1234</h2>
         <div class="profile-status-role-container">
           <p th:if="${user.isActive()}" class="active-profile">ACTIVE</p>
           <p th:if="${!user.isActive()}" class="inactive-profile">INACTIVE</p>
