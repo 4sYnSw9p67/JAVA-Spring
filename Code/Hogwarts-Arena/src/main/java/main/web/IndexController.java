@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
-    // TODO: Implement the necessary here.
+    // TODO: Implement the necessary here. 
     @GetMapping
     public String index() {
         return "index";
