@@ -1,3 +1,3 @@
 # JAVA Spring
 
-Java Spring project collection.
+Java Spring projects collection.
