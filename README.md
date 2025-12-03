@@ -1,2 +1,3 @@
-# JAVA-Spring
+# JAVA Spring
 
+Java Spring projects collection.
