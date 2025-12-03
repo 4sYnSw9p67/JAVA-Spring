@@ -1,0 +1,71 @@
+package app.web;
+
+import app.model.Notification;
+import app.service.NotificationService;
+import app.web.dto.NotificationRequest;
+import app.web.dto.NotificationResponse;
+import app.web.mapper.DtoMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/api/v1/notifications")
+@Tag(name = "My notification controller", description = "These endpoints here manage user notifications.")
+public class NotificationController {
+
+    private final NotificationService notificationService;
+
+    public NotificationController(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
+
+    @Operation(deprecated = true, summary = "Sends a new notification to the user", description = "just some dummy description")
+    @PostMapping
+    public ResponseEntity<NotificationResponse> sendNotification(@RequestBody NotificationRequest request) {
+
+        Notification notification = notificationService.send(request);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(DtoMapper.from(notification));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<NotificationResponse>> getHistory(@RequestParam("userId") UUID userId) {
+
+        List<Notification> notifications = notificationService.getHistory(userId);
+        List<NotificationResponse> responses = notifications.stream().map(DtoMapper::from).toList();
+
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/say-hello")
+    public ResponseEntity<String> sayHello(@RequestParam String name) {
+
+        throw new IllegalArgumentException();
+
+//        return ResponseEntity.ok("Hello {%s} user!".formatted(name));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAll(@RequestParam("userId") UUID userId) {
+
+        notificationService.deleteAll(userId);
+
+        return ResponseEntity.ok(null);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> retryFailed(@RequestParam("userId") UUID userId) {
+
+        notificationService.retryFailed(userId);
+
+        return ResponseEntity.ok(null);
+    }
+}
